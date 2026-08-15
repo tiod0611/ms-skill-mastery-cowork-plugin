@@ -1,6 +1,6 @@
-# MS Skill Mastery — Copilot Cowork 플러그인 (교육용 데모)
+# MS Skill Mastery — Copilot Cowork 플러그인
 
-> **MS Skill Mastery**는 사용자가 배우고 싶은 기술/스킬(예: "React", "Azure Kubernetes Service")을 말하면, **Microsoft Learn MCP 서버**로 실제 문서를 조사(research)하여 단계별 학습 로드맵을 만들고, 이를 항상 동일한 디자인의 **HTML 페이지**로 시각화해 주는 Copilot Cowork 플러그인입니다. Copilot Cowork 플러그인 구조(매니페스트 + 스킬 + 커넥터)를 배우기 위한 교육/데모용 예제입니다.
+> **MS Skill Mastery**는 사용자가 배우고 싶은 기술/스킬(예: "React", "Azure Kubernetes Service")을 말하면, **Microsoft Learn MCP 서버**로 실제 문서를 조사(research)하여 단계별 학습 로드맵을 만들고, 이를 항상 동일한 디자인의 **HTML 페이지**로 시각화해 주는 Copilot Cowork 플러그인입니다.
 
 이 저장소 자체가 하나의 Cowork 플러그인 패키지입니다 — 루트의 `manifest.json`을 기준으로 GitHub의 **Code → Download ZIP** 기능으로 바로 내려받아 패키징에 사용할 수 있도록 [PaoloPia/CopilotDevCamp-for-cowork](https://github.com/PaoloPia/CopilotDevCamp-for-cowork) 컨벤션을 따라 모든 플러그인 파일을 저장소 최상위에 배치했습니다.
 
@@ -145,4 +145,4 @@ manifest.json, color.png, outline.png, skills/
 
 ---
 
-이 플러그인은 **교육/트레이닝 목적의 데모**이며, 실제 프로덕션 배포 전에는 조직의 거버넌스·보안 정책에 맞게 검토해야 합니다.
+실제 프로덕션 배포 전에는 조직의 거버넌스·보안 정책에 맞게 검토해야 합니다.
