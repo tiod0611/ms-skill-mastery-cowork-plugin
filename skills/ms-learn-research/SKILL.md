@@ -2,7 +2,7 @@
 name: ms-learn-research
 description: |
   Microsoft Learn MCP 서버를 사용해 기술이나 스킬(예: React, Azure Kubernetes Service, Python, Microsoft Fabric)을 조사하고, 주제·리소스 링크·예상 소요 시간이 포함된 단계별 학습 로드맵을 구조화된 형태로 만듭니다.
-  사용자가 특정 기술을 배우고/마스터하고 싶다고 하거나, 스킬에 대한 학습 경로/로드맵을 요청하거나, "React를 마스터하고 싶어", "Azure Kubernetes Service 로드맵 만들어줘", "Python을 처음부터 어떻게 배우지?", "Microsoft Fabric 학습 계획 세워줘", "Kubernetes 잘하려면 뭘 배워야 해?" 같은 말을 할 때 사용하세요.
+  사용자가 특정 기술을 배우고/마스터하고 싶다고 하거나, 스킬에 대한 학습 경로/로드맵을 요청하거나, "React를 마스터하고 싶어", "Azure Kubernetes Service 로드맵 만들어줘", "Python을 처음부터 어떻게 배우지?", "Microsoft Fabric 학습 계획 세워줘", "Kubernetes 잘하려면 뭘 배워야 해?", "Copilot Cowork 스킬을 마스터 하고 싶어. 자료 조사해서, 학습 로드맵으로 그려줘." 같은 말을 할 때 사용하세요.
 license: MIT
 metadata:
   author: MS Skill Mastery Demo
@@ -26,8 +26,9 @@ metadata:
 - 사용자가 기술/스킬 이름을 언급하며 배우기, 마스터하기, 공부하기를 요청할 때
 - 스킬에 대한 "로드맵", "학습 경로", "학습 계획", "커리큘럼"을 요청할 때
 - "X를 잘하려면 뭘 배워야 해?"라고 물을 때
+- 한 메시지 안에서 조사와 시각화를 함께 요청할 때 (예: "...자료 조사해서, 학습 로드맵으로 그려줘") — 이 경우 이 스킬로 로드맵을 만든 뒤, 이어서 `roadmap-html-builder` 스킬까지 같은 턴에서 순차적으로 실행해 최종 HTML까지 완성하세요.
 
-예시: "React 마스터하고 싶어, 로드맵 만들어줘", "Azure Kubernetes Service 로드맵 만들어줘", "Microsoft Fabric을 처음부터 고급까지 배우고 싶어".
+예시: "React 마스터하고 싶어, 로드맵 만들어줘", "Azure Kubernetes Service 로드맵 만들어줘", "Microsoft Fabric을 처음부터 고급까지 배우고 싶어", "Copilot Cowork 스킬을 마스터 하고 싶어. 자료 조사해서, 학습 로드맵으로 그려줘.".
 
 ## 워크플로
 
