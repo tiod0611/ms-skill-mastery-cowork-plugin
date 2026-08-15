@@ -1,0 +1,16 @@
+# Packaged plugin output
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python cache (if generate_icons.py is re-run in a venv)
+__pycache__/
+*.pyc

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "8abb621c-54d6-4cea-b53e-5728113259f6",
+  "developer": {
+    "name": "MS Skill Mastery Demo",
+    "websiteUrl": "https://github.com/tiod0611/ms-skill-mastery-cowork-plugin",
+    "privacyUrl": "https://github.com/tiod0611/ms-skill-mastery-cowork-plugin",
+    "termsOfUseUrl": "https://github.com/tiod0611/ms-skill-mastery-cowork-plugin"
+  },
+  "name": {
+    "short": "MS Skill Mastery",
+    "full": "MS Skill Mastery - Learning Roadmap Research & HTML Generator"
+  },
+  "description": {
+    "short": "Research a technology and get a polished HTML learning roadmap",
+    "full": "Educational Cowork plugin that researches any technology or skill (e.g. React, Azure Kubernetes Service) using the Microsoft Learn MCP Server, builds a structured learning roadmap with staged topics, resources and time estimates, then renders it into a visually consistent, self-contained HTML page using a bundled reusable template."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#2563EB",
+  "agentSkills": [
+    { "folder": "./skills/ms-learn-research" },
+    { "folder": "./skills/roadmap-html-builder" }
+  ],
+  "agentConnectors": [
+    {
+      "id": "microsoft-learn-mcp",
+      "displayName": "Microsoft Learn MCP Server",
+      "description": "Access to Microsoft's official documentation for research and content generation. Provides search and fetch capabilities for Microsoft Learn articles, modules, and learning paths used to build technology skill roadmaps.",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://learn.microsoft.com/api/mcp",
+          "authorization": {
+            "type": "None"
+          }
+        }
+      }
+    }
+  ]
+}
