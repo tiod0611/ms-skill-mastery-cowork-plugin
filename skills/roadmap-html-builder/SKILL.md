@@ -1,68 +1,68 @@
 ---
 name: roadmap-html-builder
 description: |
-  Takes a structured technology learning roadmap (stages, topics, resource links, time estimates) and renders it into a polished, self-contained HTML page using the bundled reusable template.html, so every generated roadmap shares the same consistent visual design.
-  Use after roadmap content has been researched (typically via the ms-learn-research skill), when the user wants the roadmap rendered as an HTML page/visual roadmap, or asks things like "turn this into an HTML roadmap page", "make this a visual roadmap", "render this as a webpage", or "give me an HTML version of this roadmap".
+  구조화된 기술 학습 로드맵(단계, 주제, 리소스 링크, 예상 소요 시간)을 받아, 번들로 제공되는 재사용 가능한 template.html을 이용해 완성도 높은 독립 실행형 HTML 페이지로 렌더링합니다. 이를 통해 생성되는 모든 로드맵이 항상 동일한 시각적 디자인을 유지합니다.
+  로드맵 콘텐츠가 이미 조사된 후(일반적으로 ms-learn-research 스킬을 통해), 사용자가 로드맵을 HTML 페이지/시각적 로드맵으로 렌더링하길 원하거나, "이걸 HTML 로드맵 페이지로 만들어줘", "이걸 시각적 로드맵으로 만들어줘", "웹페이지로 렌더링해줘", "이 로드맵의 HTML 버전을 줘" 같은 말을 할 때 사용하세요.
 license: MIT
 metadata:
   author: MS Skill Mastery Demo
   version: "1.0"
 ---
 
-# Roadmap HTML Builder Skill
+# 로드맵 HTML 빌더 스킬
 
-## What This Skill Does
+## 이 스킬이 하는 일
 
-Converts a structured learning roadmap (skill name, summary, ordered stages, topics, resource links, time estimates — as produced by the `ms-learn-research` skill) into a finished, self-contained HTML file by filling in the bundled template:
+구조화된 학습 로드맵(스킬 이름, 요약, 순서가 있는 단계, 주제, 리소스 링크, 예상 소요 시간 — `ms-learn-research` 스킬이 생성한 형식)을 받아, 번들로 제공되는 템플릿을 채워 완성된 독립 실행형 HTML 파일로 변환합니다:
 
 ```
 skills/roadmap-html-builder/template.html
 ```
 
-Always load and reuse this exact template file for every generation. **Never invent a new HTML layout from scratch** — the whole point of this skill is that every roadmap the user generates, regardless of topic, shares the same polished design. Only the content (skill name, stages, topics, links, time estimates) changes between generations.
+매번 생성할 때마다 이 정확한 템플릿 파일을 항상 불러와 재사용하세요. **처음부터 새로운 HTML 레이아웃을 만들지 마세요** — 이 스킬의 핵심은 주제와 상관없이 사용자가 생성하는 모든 로드맵이 동일한 완성도 높은 디자인을 공유하는 것입니다. 생성할 때마다 바뀌는 것은 내용(스킬 이름, 단계, 주제, 링크, 예상 시간)뿐입니다.
 
-## When to Use This Skill
+## 언제 이 스킬을 사용하나
 
-Activate this skill when:
-- The user has just received a structured roadmap (JSON block) from the `ms-learn-research` skill and now wants it turned into a page/site/HTML.
-- The user directly asks for "an HTML roadmap", "a visual roadmap page", "render this as a webpage", etc., and roadmap content is available in the conversation.
+다음의 경우 이 스킬을 활성화하세요:
+- 사용자가 방금 `ms-learn-research` 스킬로부터 구조화된 로드맵(JSON 블록)을 받았고, 이제 이를 페이지/사이트/HTML로 만들고 싶어할 때
+- 사용자가 대화에 로드맵 콘텐츠가 있는 상태에서 "HTML 로드맵", "시각적 로드맵 페이지", "웹페이지로 렌더링" 등을 직접 요청할 때
 
-If no structured roadmap content exists yet in the conversation, first run the `ms-learn-research` skill's workflow (or ask the user for the skill name) to obtain it before rendering.
+대화에 아직 구조화된 로드맵 콘텐츠가 없다면, 렌더링하기 전에 먼저 `ms-learn-research` 스킬의 워크플로를 실행하거나(또는 사용자에게 스킬 이름을 물어) 콘텐츠를 확보하세요.
 
-## Workflow
+## 워크플로
 
-### Step 1: Obtain Structured Roadmap Content
+### 1단계: 구조화된 로드맵 콘텐츠 확보
 
-Use the structured JSON roadmap block from the `ms-learn-research` skill's output (shape: `skillName`, `summary`, `stages[]`, each stage with `title`, `estimatedTime`, `topics[]`, each topic with `name`, `description`, `resourceTitle`, `resourceUrl`).
+`ms-learn-research` 스킬 출력의 구조화된 JSON 로드맵 블록을 사용합니다 (형식: `skillName`, `summary`, `stages[]`, 각 단계는 `title`, `estimatedTime`, `topics[]`를 가지며, 각 주제는 `name`, `description`, `resourceTitle`, `resourceUrl`을 가짐).
 
-### Step 2: Load the Template
+### 2단계: 템플릿 불러오기
 
-Open `skills/roadmap-html-builder/template.html` (bundled in this skill folder). This file contains:
-- Top-level placeholders: `{{SKILL_NAME}}`, `{{SUMMARY}}`, `{{GENERATED_DATE}}`
-- A **STAGE BLOCK**, delimited by `<!-- STAGE_BLOCK_START -->` / `<!-- STAGE_BLOCK_END -->` HTML comments, with placeholders: `{{STAGE_INDEX}}`, `{{STAGE_LEVEL_CLASS}}` (`beginner` | `intermediate` | `advanced`), `{{STAGE_TITLE}}`, `{{STAGE_TIME}}`, `{{STAGE_TOPICS}}`
-- A **TOPIC BLOCK** nested inside the stage block, delimited by `<!-- TOPIC_BLOCK_START -->` / `<!-- TOPIC_BLOCK_END -->`, with placeholders: `{{TOPIC_NAME}}`, `{{TOPIC_DESCRIPTION}}`, `{{RESOURCE_URL}}`, `{{RESOURCE_TITLE}}`
+`skills/roadmap-html-builder/template.html`(이 스킬 폴더에 번들로 포함)을 엽니다. 이 파일에는 다음이 들어 있습니다:
+- 최상위 플레이스홀더: `{{SKILL_NAME}}`, `{{SUMMARY}}`, `{{GENERATED_DATE}}`
+- `<!-- STAGE_BLOCK_START -->` / `<!-- STAGE_BLOCK_END -->` HTML 주석으로 구분된 **STAGE 블록**. 플레이스홀더: `{{STAGE_INDEX}}`, `{{STAGE_LEVEL_CLASS}}` (`beginner` | `intermediate` | `advanced`), `{{STAGE_TITLE}}`, `{{STAGE_TIME}}`, `{{STAGE_TOPICS}}`
+- STAGE 블록 안에 중첩된 **TOPIC 블록**. `<!-- TOPIC_BLOCK_START -->` / `<!-- TOPIC_BLOCK_END -->`로 구분되며, 플레이스홀더: `{{TOPIC_NAME}}`, `{{TOPIC_DESCRIPTION}}`, `{{RESOURCE_URL}}`, `{{RESOURCE_TITLE}}`
 
-### Step 3: Fill the Template
+### 3단계: 템플릿 채우기
 
-1. Replace the top-level placeholders once (`{{SKILL_NAME}}`, `{{SUMMARY}}`, `{{GENERATED_DATE}}` — use today's date).
-2. For each stage in the roadmap (in order), duplicate the STAGE BLOCK section and fill in its placeholders. Map stage order to `{{STAGE_LEVEL_CLASS}}`: 1st stage → `beginner`, 2nd → `intermediate`, 3rd+ → `advanced` (reuse `advanced` for any extra stages beyond three).
-3. Within each stage's duplicated block, for every topic in that stage, duplicate the nested TOPIC BLOCK `<li>` and fill in its placeholders. Concatenate all topic `<li>` elements together to replace the topics area (remove the `{{STAGE_TOPICS}}` token and the topic block's own comment markers in the final output — they are authoring guides only, not meant to remain in the final file).
-4. Remove the `STAGE_BLOCK_START` / `STAGE_BLOCK_END` comment markers from the final output as well — they exist only to show where to duplicate.
+1. 최상위 플레이스홀더(`{{SKILL_NAME}}`, `{{SUMMARY}}`, `{{GENERATED_DATE}}` — 오늘 날짜 사용)를 한 번 치환합니다.
+2. 로드맵의 각 단계마다(순서대로) STAGE 블록 섹션을 복제하고 플레이스홀더를 채웁니다. 단계 순서를 `{{STAGE_LEVEL_CLASS}}`에 매핑합니다: 1번째 단계 → `beginner`, 2번째 → `intermediate`, 3번째 이후 → `advanced` (세 개를 넘는 추가 단계는 `advanced`를 재사용).
+3. 각 단계의 복제된 블록 안에서, 해당 단계의 모든 주제마다 중첩된 TOPIC 블록 `<li>`를 복제하고 플레이스홀더를 채웁니다. 모든 주제 `<li>` 엘리먼트를 이어 붙여 주제 영역을 대체합니다(최종 출력에서는 `{{STAGE_TOPICS}}` 토큰과 topic 블록 자체의 주석 마커를 제거하세요 — 이는 작성 가이드일 뿐 최종 파일에 남아있으면 안 됩니다).
+4. 최종 출력에서 `STAGE_BLOCK_START` / `STAGE_BLOCK_END` 주석 마커도 제거하세요 — 이는 어디를 복제해야 하는지 보여주기 위한 것일 뿐입니다.
 
-### Step 4: Produce the Final Output
+### 4단계: 최종 출력 생성
 
-Output one complete, self-contained HTML file (inline CSS, no external dependencies, opens directly in any browser) with all placeholders replaced and no leftover `{{...}}` tokens or authoring comments. Suggest a filename like `<skill-name>-roadmap.html` (kebab-case) and present the full HTML so the user can save it, or write it to disk if the environment supports file creation.
+모든 플레이스홀더가 치환되고 남아있는 `{{...}}` 토큰이나 작성 가이드 주석이 없는, 완전한 독립 실행형 HTML 파일(인라인 CSS, 외부 의존성 없음, 어떤 브라우저에서도 바로 열림) 하나를 출력합니다. `<스킬이름>-roadmap.html`(kebab-case) 형태의 파일명을 제안하고, 사용자가 저장할 수 있도록 전체 HTML을 제시하거나, 환경이 파일 생성을 지원한다면 디스크에 직접 작성하세요.
 
-## Output Format
+## 출력 형식
 
-A single, complete HTML document, ready to open in a browser, that:
-- Uses the exact visual design of `template.html` (do not alter colors, layout, or CSS — only fill content)
-- Displays the skill name, summary, and generation date in the header
-- Shows one styled stage card per roadmap stage, in order, each with its time-estimate badge and topic list
-- Includes working links to the Microsoft Learn resources cited by `ms-learn-research`
+브라우저에서 바로 열 수 있는 완전한 HTML 문서 하나로, 다음을 만족해야 합니다:
+- `template.html`의 시각적 디자인을 정확히 그대로 사용합니다(색상, 레이아웃, CSS를 변경하지 말고 내용만 채우세요)
+- 헤더에 스킬 이름, 요약, 생성 날짜를 표시합니다
+- 로드맵의 각 단계마다 스타일이 적용된 단계 카드를 순서대로 보여주며, 각 카드에는 예상 시간 배지와 주제 목록이 포함됩니다
+- `ms-learn-research`가 인용한 Microsoft Learn 리소스로 연결되는 작동하는 링크를 포함합니다
 
-## Notes
+## 참고 사항
 
-- The template is intentionally reused as-is for every topic — this is what keeps the visual design consistent across different skills/technologies. Do not redesign it per request.
-- If a roadmap has more than 3 stages, all stages beyond the third should use the `advanced` color class unless the roadmap author specifies otherwise.
-- Keep topic descriptions concise (1-2 sentences) so cards stay visually balanced, matching the density shown in the template.
+- 템플릿은 의도적으로 모든 주제에 대해 그대로 재사용됩니다 — 이것이 서로 다른 스킬/기술 간에도 시각적 디자인을 일관되게 유지하는 방법입니다. 요청마다 다시 디자인하지 마세요.
+- 로드맵에 3개보다 많은 단계가 있다면, 로드맵 작성자가 다르게 지정하지 않는 한 3번째 이후 모든 단계는 `advanced` 색상 클래스를 사용해야 합니다.
+- 카드가 시각적으로 균형 잡히도록 주제 설명은 간결하게(1-2문장) 유지하고, 템플릿에서 보여지는 밀도에 맞추세요.

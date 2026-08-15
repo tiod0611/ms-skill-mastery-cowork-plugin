@@ -10,12 +10,12 @@
     "termsOfUseUrl": "https://github.com/tiod0611/ms-skill-mastery-cowork-plugin"
   },
   "name": {
-    "short": "MS Skill Mastery",
-    "full": "MS Skill Mastery - Learning Roadmap Research & HTML Generator"
+    "short": "MS 스킬 마스터리",
+    "full": "MS 스킬 마스터리 - 학습 로드맵 리서치 & HTML 생성기"
   },
   "description": {
-    "short": "Research a technology and get a polished HTML learning roadmap",
-    "full": "Educational Cowork plugin that researches any technology or skill (e.g. React, Azure Kubernetes Service) using the Microsoft Learn MCP Server, builds a structured learning roadmap with staged topics, resources and time estimates, then renders it into a visually consistent, self-contained HTML page using a bundled reusable template."
+    "short": "기술을 조사하고 완성도 높은 HTML 학습 로드맵을 받아보세요",
+    "full": "Microsoft Learn MCP 서버를 사용해 어떤 기술이나 스킬(예: React, Azure Kubernetes Service)이든 조사하고, 단계별 주제·리소스·예상 소요 시간이 담긴 학습 로드맵을 구성한 뒤, 재사용 가능한 템플릿을 이용해 항상 동일한 디자인의 독립 실행형 HTML 페이지로 렌더링해 주는 교육용 Cowork 플러그인입니다."
   },
   "icons": {
     "color": "color.png",
@@ -30,7 +30,7 @@
     {
       "id": "microsoft-learn-mcp",
       "displayName": "Microsoft Learn MCP Server",
-      "description": "Access to Microsoft's official documentation for research and content generation. Provides search and fetch capabilities for Microsoft Learn articles, modules, and learning paths used to build technology skill roadmaps.",
+      "description": "리서치와 콘텐츠 생성을 위한 Microsoft 공식 문서 접근 커넥터. 기술 학습 로드맵 구성에 사용되는 Microsoft Learn 문서, 모듈, 학습 경로에 대한 검색·조회 기능을 제공합니다.",
       "toolSource": {
         "remoteMcpServer": {
           "mcpServerUrl": "https://learn.microsoft.com/api/mcp",
