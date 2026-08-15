@@ -2,7 +2,7 @@
 
 > **MS Skill Mastery**는 사용자가 배우고 싶은 기술/스킬(예: "React", "Azure Kubernetes Service")을 말하면, **Microsoft Learn MCP 서버**로 실제 문서를 조사(research)하여 단계별 학습 로드맵을 만들고, 이를 항상 동일한 디자인의 **HTML 페이지**로 시각화해 주는 Copilot Cowork 플러그인입니다.
 
-이 저장소 자체가 하나의 Cowork 플러그인 패키지입니다 — 루트의 `manifest.json`을 기준으로 GitHub의 **Code → Download ZIP** 기능으로 바로 내려받아 패키징에 사용할 수 있도록 [PaoloPia/CopilotDevCamp-for-cowork](https://github.com/PaoloPia/CopilotDevCamp-for-cowork) 컨벤션을 따라 모든 플러그인 파일을 저장소 최상위에 배치했습니다.
+이 저장소 자체가 하나의 Cowork 플러그인 패키지입니다 — [PaoloPia/CopilotDevCamp-for-cowork](https://github.com/PaoloPia/CopilotDevCamp-for-cowork) 컨벤션을 따라 `manifest.json`을 비롯한 모든 플러그인 파일을 저장소 최상위에 배치했으며, 플러그인 사용에 꼭 필요한 파일만 남겨 최소 구성으로 유지합니다.
 
 ## 개요 (Overview)
 
@@ -23,8 +23,6 @@
 ```
 ms-skill-mastery-cowork-plugin/         (저장소 루트 = 플러그인 루트)
 ├── manifest.json                 # Teams/Cowork 앱 매니페스트
-├── package.json                  # 패키징 스크립트 (npm run package)
-├── generate_icons.py             # 아이콘 생성 스크립트 (Pillow 사용)
 ├── color.png                     # 192x192 컬러 아이콘
 ├── outline.png                   # 32x32 아웃라인 아이콘
 ├── .gitignore
@@ -67,54 +65,34 @@ Microsoft Learn MCP 서버를 통해 기술 문서를 검색·수집하고, **Be
 
 ## 사전 준비 사항 (Prerequisites)
 
-- Windows / macOS / Linux + PowerShell 또는 `zip` 명령 사용 가능 환경
-- 아이콘을 재생성하려면: **Python 3.8+** 및 **Pillow** 패키지
+- 압축 프로그램(Windows 탐색기 내장 압축, macOS Finder, 또는 `zip`/`Compress-Archive` 명령) 사용 가능 환경
 - Copilot Cowork 플러그인을 업로드할 수 있는 Microsoft 365 관리자 권한 (조직 배포 시)
-
-## 의존성 설치 (아이콘 재생성이 필요할 때만)
-
-```powershell
-pip install Pillow
-```
-
-## 아이콘 재생성
-
-```powershell
-python generate_icons.py
-```
-
-- `color.png` — 192×192px, 풀컬러. 파란색→보라색 그라데이션 배경 위에 굽이치는 "학습 경로(path)"와 정상의 깃발(마스터리 달성)을 표현한 아이콘입니다.
-- `outline.png` — 32×32px, 흰색 라인 아트(투명 배경). Teams 아웃라인 아이콘 규칙에 맞춘 단순화된 버전입니다.
 
 ## 패키징 (Build)
 
-저장소 루트(이 폴더)에서 실행하세요.
-
-```powershell
-# Windows (PowerShell)
-npm run package
-```
-
-```bash
-# macOS / Linux
-npm run package:unix
-```
-
-두 명령 모두 다음 파일들을 압축하여 `ms-skill-mastery.zip`을 생성합니다:
+이 저장소는 별도의 빌드 도구 없이, 아래 파일/폴더만 압축하면 바로 업로드용 `.zip`이 됩니다:
 
 ```
 manifest.json, color.png, outline.png, skills/
 ```
 
-> `ms-skill-mastery.zip`은 `.gitignore`에 의해 저장소에 커밋되지 않습니다 — 필요할 때마다 재생성하세요.
+**GitHub에서 바로 ZIP 다운로드하는 방법(권장)**: 저장소 페이지에서 **Code → Download ZIP**으로 전체 저장소를 내려받은 뒤, 압축을 풀고 그 안에서 위 4개 항목(`manifest.json`, `color.png`, `outline.png`, `skills/`)만 다시 선택해 압축하면 됩니다. 모든 플러그인 파일이 저장소 최상위에 있어 하위 폴더를 찾아 들어갈 필요가 없습니다.
 
-### GitHub에서 바로 ZIP 다운로드하는 방법
+**직접 압축하는 방법**:
 
-패키징 스크립트를 실행할 수 없는 환경이라면, GitHub 저장소 페이지에서 **Code → Download ZIP**으로 전체 저장소를 내려받은 뒤, 압축을 풀고 그 안에서 `manifest.json`, `color.png`, `outline.png`, `skills/` 만 다시 압축해 Cowork에 업로드하면 됩니다. 모든 플러그인 파일이 저장소 최상위에 있기 때문에 별도로 하위 폴더를 찾아 들어갈 필요가 없습니다.
+```powershell
+# Windows (PowerShell)
+Compress-Archive -Path manifest.json, color.png, outline.png, skills -DestinationPath ms-skill-mastery.zip -Force
+```
+
+```bash
+# macOS / Linux
+zip -r ms-skill-mastery.zip manifest.json color.png outline.png skills/
+```
 
 ## Copilot Cowork에 업로드/설치하는 방법
 
-1. 위 패키징 명령으로 `ms-skill-mastery.zip`을 생성합니다 (또는 GitHub Download ZIP 방식 사용).
+1. 위 방법으로 `ms-skill-mastery.zip`을 준비합니다.
 2. **Microsoft 365 관리 센터**(admin.microsoft.com)에 관리자로 로그인합니다.
 3. **Copilot** (또는 **Agents**) 섹션으로 이동합니다.
 4. **Upload Agent**(에이전트 업로드) 옵션을 선택하고, 생성한 zip 파일을 업로드합니다.

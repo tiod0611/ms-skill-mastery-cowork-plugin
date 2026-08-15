@@ -10,7 +10,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# Python cache (if generate_icons.py is re-run in a venv)
-__pycache__/
-*.pyc
